@@ -16,6 +16,7 @@ import { AlertDialogComponent } from './modal/modal.component';
 import MatModules from '../utils/imports.js';
 import { UsersState } from './store';
 import { environment } from '../environments/environment';
+import { FavoritesComponent } from './favorites/favorites.component';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { environment } from '../environments/environment';
     ProfileComponent,
     SidebarComponent,
     AlertDialogComponent,
+    FavoritesComponent,
   ],
   imports: [
     BrowserModule,

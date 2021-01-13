@@ -1,10 +1,12 @@
 import { MatDialog } from '@angular/material/dialog';
 import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngxs/store';
+import { Store, Select } from '@ngxs/store';
+import { Observable } from 'rxjs';
 
 import { UsersService } from '../../services/users/users.service';
 import { AlertDialogComponent } from '../modal/modal.component';
 import { SelectUser } from '../store/actions/users.actions';
+import { UsersState } from '../store';
 
 export interface User {
   address: {
@@ -36,9 +38,11 @@ export interface User {
   styleUrls: ['./users.component.scss']
 })
 export class UsersComponent implements OnInit {
+  @Select(UsersState.GetFavoriteUsers) favorites: Observable<any>;
   displayedColumns: string[] = ['name', 'username', 'phone', 'website'];
   loading: Boolean = false;
   users: Array<User> = [];
+  favs = [];
 
   constructor(
     private usersService: UsersService,
@@ -48,6 +52,9 @@ export class UsersComponent implements OnInit {
 
   ngOnInit() {
     this.getUsers();
+    this.favorites.subscribe(f => {
+      this.favs = f;
+    });
   }
 
   openAlertDialog(user) {
@@ -62,5 +69,9 @@ export class UsersComponent implements OnInit {
     this.loading = true;
     this.users = await this.usersService.getUsers();
     this.loading = false;
+  }
+
+  isFavorite(user) {
+    return this.favs.find(({ id }) => id === user.id);;
   }
 }

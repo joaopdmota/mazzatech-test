@@ -1,10 +1,10 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { VERSION, MatDialogRef, MatDialog, MatSnackBar, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Store, Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 
 import { UsersState } from '../store';
-import { SelectUser } from '../store/actions/users.actions';
+import { AddFavorite, DeleteFavorite, UnselectUser } from '../store/actions/users.actions';
 @Component({
     selector: 'app-modal',
     templateUrl: './modal.component.html',
@@ -12,9 +12,10 @@ import { SelectUser } from '../store/actions/users.actions';
 })
 
 export class AlertDialogComponent implements OnInit {
-  message: string = ""
-  cancelButtonText = "Cancel"
   @Select(UsersState.GetSelectedUser) selectedUser: Observable<any>;
+  @Select(UsersState.GetFavoriteUsers) favorites: Observable<any>;
+  user = null;
+  favs = [];
   lat: number = 0;
   lng: number = 0;
   zoom: number = 15;
@@ -22,19 +23,40 @@ export class AlertDialogComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) private data: any,
     private dialogRef: MatDialogRef<AlertDialogComponent>,
+    private store: Store,
   ) {
     this.dialogRef.updateSize('300vw','300vw')
   }
 
   ngOnInit() {
-    this.selectedUser.subscribe(user => {
-      this.lat = Number(user.address.geo.lat);
-      this.lng = Number(user.address.geo.lat);
+    this.selectedUser.subscribe(u => {
+      this.lat = Number(u.address.geo.lat);
+      this.lng = Number(u.address.geo.lat);
+      this.user = u
+    });
+    this.favorites.subscribe(f => {
+      this.favs = f;
     });
   }
 
-  onConfirmClick(): void {
-    this.dialogRef.close(true);
+  ngOnDestroy() {
+    this.store.dispatch(new UnselectUser());
   }
 
+  checkFavorites() {
+    if (this.favs.length) {
+      const favoriteUser = this.favs.find(({ id }) => this.user.id === id);
+      return !!favoriteUser;
+    }
+
+    return false;
+  }
+
+  favoriteUser() {
+    this.store.dispatch(new AddFavorite(this.user));
+  }
+
+  deleteFavorite() {
+    this.store.dispatch(new DeleteFavorite(this.user.id));
+  }
 }

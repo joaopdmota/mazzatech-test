@@ -19,15 +19,15 @@ export class SidebarComponent implements OnDestroy {
   fillerNav: Array<Path> = [
     {
       path: '/profile',
-      description: 'Página inicial',
+      description: 'Home',
     },
     {
       path: '/users',
-      description: 'Listagem de usuários',
+      description: 'Users',
     },
     {
       path: '/favorites',
-      description: 'Meus favoritos',
+      description: 'Favorites',
     },
   ];
 

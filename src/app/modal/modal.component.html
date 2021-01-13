@@ -1,56 +1,106 @@
 <mat-dialog-content>
   <div class="info-box">
-    <span class="user-info">name: </span>
-    <span>{{ (selectedUser | async)?.name }}</span>
+    <span class="label">name</span>
+    <div class="user-info">
+      <span class="icon">
+          <mat-icon>face</mat-icon>
+      </span>
+      <span>{{ (selectedUser | async)?.name }}</span>
+    </div>
   </div>
 
   <div class="info-box">
-    <span class="user-info">username: </span>
-    <span>{{ (selectedUser | async)?.username }}</span>
+    <span class="label">username</span>
+    <div class="user-info">
+      <span class="icon">
+          <mat-icon>alternate_email</mat-icon>
+      </span>
+      <span>{{ (selectedUser | async)?.username }}</span>
+    </div>
   </div>
 
   <div class="info-box">
-    <span class="user-info">email: </span>
-    <span>{{ (selectedUser | async)?.email }}</span>
+    <span class="label">email</span>
+    <div class="user-info">
+      <span class="icon">
+          <mat-icon>email</mat-icon>
+      </span>
+      <span>{{ (selectedUser | async)?.email }}</span>
+    </div>
   </div>
 
   <div class="info-box">
-    <span class="user-info">phone: </span>
-    <span>{{ (selectedUser | async)?.phone }}</span>
+    <span class="label">phone</span>
+    <div class="user-info">
+      <span class="icon">
+          <mat-icon>phone</mat-icon>
+      </span>
+      <span>{{ (selectedUser | async)?.phone }}</span>
+    </div>
   </div>
 
   <div class="info-box">
-    <span class="user-info">website: </span>
-    <span>{{ (selectedUser | async)?.website }}</span>
+    <span class="label">website</span>
+    <div class="user-info">
+      <span class="icon">
+          <mat-icon>computer</mat-icon>
+      </span>
+      <span>{{ (selectedUser | async)?.website }}</span>
+    </div>
   </div>
 
   <div class="info-box">
-    <span class="user-info">company name: </span>
-    <span>{{ (selectedUser | async)?.company?.name }}</span>
+    <span class="label">company name</span>
+    <div class="user-info">
+      <span class="icon">
+          <mat-icon>work</mat-icon>
+      </span>
+      <span>{{ (selectedUser | async)?.company?.name }}</span>
+    </div>
   </div>
 
   <div class="info-box">
-    <span class="user-info">city: </span>
-    <span> {{ (selectedUser | async)?.address?.street }} </span>
-  </div>
-
-  <div class="info-box">
-    <span class="user-info">street: </span>
-    <div class="info-box street">
+    <span class="label">address</span>
+    <div class="user-info">
+      <span class="icon">
+          <mat-icon>house</mat-icon>
+      </span>
       <span> {{ (selectedUser | async)?.address?.street }} </span>
+        &nbsp;
       <span> {{ (selectedUser | async)?.address?.suite }} </span>
     </div>
   </div>
 
   <div class="info-box">
-    <span class="user-info">zipcode: </span>
-    <span> {{ (selectedUser | async)?.address?.street }} </span>
+    <span class="label">zipcode</span>
+    <div class="user-info">
+      <span class="icon">
+          <mat-icon>location_on</mat-icon>
+      </span>
+      <span> {{ (selectedUser | async)?.address?.zipcode }} </span>
+    </div>
   </div>
 
   <agm-map [latitude]="lat" [zoom]="zoom" [longitude]="lng" class="maps">
     <agm-marker  [latitude]="lat" [longitude]="lng"></agm-marker>
   </agm-map>
 </mat-dialog-content>
-<mat-dialog-actions align="end">
-  <button mat-raised-button color="primary" mat-dialog-close tabindex="-1">{{cancelButtonText}}</button>
+<mat-dialog-actions align="start">
+  <div class="flex-container">
+    <button mat-button color="primary" mat-dialog-close tabindex="-1">Close</button>
+    <button
+      mat-raised-button color="primary"
+      mat-dialog-close tabindex="-1" (click)="deleteFavorite()"
+      *ngIf="checkFavorites()"
+    >
+      Unlike user
+    </button>
+    <button
+      mat-raised-button color="primary"
+      mat-dialog-close tabindex="-1" (click)="favoriteUser()"
+      *ngIf="!checkFavorites()"
+    >
+      Like user
+    </button>
+  </div>
 </mat-dialog-actions>

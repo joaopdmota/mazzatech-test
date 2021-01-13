@@ -1,13 +1,13 @@
-<span class="access">Acesso rápido</span>
+<span class="access">Quick access</span>
 <mat-card class="example-card">
   <mat-card-content>
     <p>
-      <span [matBadge]="storedUsers.length" matBadgeOverlap="false">
-        Usuários favoritos
+      <span [matBadge]="favs.length" matBadgeOverlap="false">
+        Liked users
       </span>
     </p>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-raised-button color="primary">Ver todos usuários favoritados</button>
+    <button mat-raised-button color="primary" (click)="sendToFavoriteRoute()">Show liked users</button>
   </mat-card-actions>
 </mat-card>

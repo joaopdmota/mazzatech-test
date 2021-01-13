@@ -1,17 +1,40 @@
 .info-box {
   display: flex;
+  flex-direction: column;
   margin-bottom: 10px;
 }
 
 .user-info {
-  margin-right: 10px;
+  margin-top: 10px;
+  background: lightgray;
+  color: gray;
+  display: flex;
+  align-items: center;
 }
 
-.street {
-  margin-bottom: unset;
+.label {
+  text-transform: capitalize;
+  font-size: 16px;
+  color: lightslategray;
+}
+
+.icon {
+  margin-right: 10px;
+  padding: 5px;
+  background: darkgray;
 }
 
 .maps {
   width: 500px;
   height: 500px;
+}
+
+.container {
+  margin-bottom: unset;
+}
+
+.flex-container {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
 }

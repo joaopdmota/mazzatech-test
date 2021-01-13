@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Select } from '@ngxs/store';
+import { Observable } from 'rxjs';
 
+import { UsersState } from '../store';
 
 @Component({
   selector: 'app-profile',
@@ -7,17 +11,23 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
-  storedUsers:any = [];
+
+  @Select(UsersState.GetFavoriteUsers) favorites: Observable<any>;
+
+  favs:any = [];
   loading: Boolean = false;
 
-
-  constructor() {}
+  constructor(private router: Router ) {}
 
   ngOnInit() {
-    this.storedUsers = this.fetchUsers() || [];
+    this.favorites.subscribe(f => {
+      if (f.length) {
+        this.favs = f;
+      }
+    });
   }
 
-  fetchUsers() {
-    return window.localStorage.getItem('users');
+  sendToFavoriteRoute() {
+    this.router.navigate(['/favorites']);
   }
 }
