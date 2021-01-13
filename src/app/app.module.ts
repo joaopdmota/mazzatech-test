@@ -15,6 +15,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { AlertDialogComponent } from './modal/modal.component';
 import MatModules from '../utils/imports.js';
 import { UsersState } from './store';
+import { environment } from '../environments/environment';
 
 
 @NgModule({
@@ -32,9 +33,9 @@ import { UsersState } from './store';
     HttpClientModule,
     MatDialogModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyAcjUUZqsS3HQfthYrfQ06aXXZV2-nO_tM'
+      apiKey: environment.GOOGLE_MAPS_API_KEY,
     }),
-    NgxsModule.forRoot([UsersState], { developmentMode: true } ),
+    NgxsModule.forRoot([UsersState]),
     NgxsReduxDevtoolsPluginModule.forRoot(),
     ...MatModules
   ],
