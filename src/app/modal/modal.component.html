@@ -1,0 +1,56 @@
+<mat-dialog-content>
+  <div class="info-box">
+    <span class="user-info">name: </span>
+    <span>{{ (selectedUser | async)?.name }}</span>
+  </div>
+
+  <div class="info-box">
+    <span class="user-info">username: </span>
+    <span>{{ (selectedUser | async)?.username }}</span>
+  </div>
+
+  <div class="info-box">
+    <span class="user-info">email: </span>
+    <span>{{ (selectedUser | async)?.email }}</span>
+  </div>
+
+  <div class="info-box">
+    <span class="user-info">phone: </span>
+    <span>{{ (selectedUser | async)?.phone }}</span>
+  </div>
+
+  <div class="info-box">
+    <span class="user-info">website: </span>
+    <span>{{ (selectedUser | async)?.website }}</span>
+  </div>
+
+  <div class="info-box">
+    <span class="user-info">company name: </span>
+    <span>{{ (selectedUser | async)?.company?.name }}</span>
+  </div>
+
+  <div class="info-box">
+    <span class="user-info">city: </span>
+    <span> {{ (selectedUser | async)?.address?.street }} </span>
+  </div>
+
+  <div class="info-box">
+    <span class="user-info">street: </span>
+    <div class="info-box street">
+      <span> {{ (selectedUser | async)?.address?.street }} </span>
+      <span> {{ (selectedUser | async)?.address?.suite }} </span>
+    </div>
+  </div>
+
+  <div class="info-box">
+    <span class="user-info">zipcode: </span>
+    <span> {{ (selectedUser | async)?.address?.street }} </span>
+  </div>
+
+  <agm-map [latitude]="lat" [zoom]="zoom" [longitude]="lng" class="maps">
+    <agm-marker  [latitude]="lat" [longitude]="lng"></agm-marker>
+  </agm-map>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-raised-button color="primary" mat-dialog-close tabindex="-1">{{cancelButtonText}}</button>
+</mat-dialog-actions>

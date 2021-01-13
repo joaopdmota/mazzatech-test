@@ -6,10 +6,6 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 
 const routes: Routes = [
   {
-    path: '**',
-    component: SidebarComponent,
-  },
-  {
     path: '',
     redirectTo: '/profile',
     pathMatch: 'full'
@@ -24,7 +20,7 @@ const routes: Routes = [
   },
   {
     path: 'users',
-    component: ProfileComponent,
+    component: UsersComponent,
   },
 ];
 
