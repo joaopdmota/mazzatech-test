@@ -1,0 +1,42 @@
+1. Se eu precisar trabalhar com um ambiente de desenvolvimento, um de testes e um
+de produção, o que eu devo fazer?
+
+R: Deve ser necessário isolar os ambientes porém mantê-los com a mesma estrutura, para que o ambiente de produção tenha o mínimo de diferença dos demais.
+
+
+2. Onde devem ser importados estilos de folha? Como por exemplo os do Bootstrap,
+Font Awesome, etc.
+
+R: Dentro da pasta "assets".
+
+
+3. Devo definir o tipo da minha variável como "any"? Por que?
+
+R: Não. Todas as variáveis devem ser tipadas. Fazer isso garante duranteo o desenvolvimento as variáveis sejam validadas, aumentando a robustez do código e diminuindo bugs.
+
+
+4. Como faço para configurar minha aplicação para rodar em um contexto diferente do
+servido localmente?
+
+R:
+
+
+5. É possível utilizar múltiplos módulos de rotas?
+
+R: Sim.
+
+
+6. Você utilizaria Lazy Load para gerenciar as rotas da aplicação? Por que?
+
+R: Sim, pois utilizando lazy loading o carregamento só é feito quando o usuário navega para a rota de um respectivo módulo.
+
+
+7. É possível consumir uma stream de dados utilizando as bibliotecas que
+acompanham por default o Framework?
+
+R: É possível fazer strem de dados utilizando apenas o rxjs. Como mencionado nesse artigo: https://blog.codewithdan.com/pushing-real-time-data-to-an-angular-service-using-web-sockets/
+
+
+8. Como eu garanto que meu código segue os padrões EcmaScript?
+
+R: Utilizando uma ferramenta para análise de código. A mais utilizada pela comunidade javascript é o ESLINT.
